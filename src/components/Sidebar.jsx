@@ -144,8 +144,8 @@ export default function Sidebar({ projects, handleSelectedProject,handleOpenAddP
           </li>
         </ul>
       </div>
-      <div className="py-7 px-5">
-        <h3 className="text-xs font-bold text-[#787486] flex align-items-center justify-between mb-4 cursor-pointer">
+      <div className="">
+        <h3 className="text-xs font-bold text-[#787486] flex align-items-center justify-between mb-4 cursor-pointer py-7 px-5 pb-0">
           MY PROJECTS{" "}
           <button type="button" className="cursor-pointer" onClick={()=>handleOpenAddProjectOffcanvas()}>
           <svg
@@ -175,7 +175,7 @@ export default function Sidebar({ projects, handleSelectedProject,handleOpenAddP
           </svg>
           </button>
         </h3>
-        <ul>
+        <ul className="overflow-auto h-[40vh] pt-0 py-7 px-5">
           {projects.map((project) => (
             <li
               key={project.id}

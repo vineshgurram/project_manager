@@ -1,6 +1,6 @@
 import ProjectView from "./ProjectView";
 import Sidebar from "./Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditTaskOffcanvas from "./EditTaskOffcanvas";
 import AddTaskOffcanvas from "./AddTaskOffcanvas";
 import AddProjectOffcanvas from "./AddProjectOffcanvas";
@@ -15,7 +15,7 @@ export default function Dashboard({ projects, setProjects }) {
 
   const allTaskData = projects.flatMap((project) => {
     return project.tasks.map((task) => {
-      return { ...task, project: project.title };
+      return { ...task, project: project.title,projectId : project.id };
     });
   });
 
@@ -35,7 +35,10 @@ export default function Dashboard({ projects, setProjects }) {
     (project) => project.id === selectedProject,
   );
 
-  const selectedTaskData = selectedProjectData?.tasks.find(
+
+  const projectSelected = projects.find((project)=> project.id === selectedTask?.projectId)
+
+  const selectedTaskData = projectSelected?.tasks.find(
     (task) => task.id === selectedTask?.taskId,
   );
 
@@ -111,7 +114,7 @@ export default function Dashboard({ projects, setProjects }) {
   function handleDeleteTask(taskId) {
     setProjects((prev) => {
       return prev.map((project) => {
-        return project.id === selectedProject
+        return project.id === selectedTask.projectId
           ? {
               ...project,
               tasks: project.tasks.filter((task) => {
@@ -147,9 +150,8 @@ export default function Dashboard({ projects, setProjects }) {
   }
 
   // useEffect(() => {
-  //   console.log(allT);
-  //   // console.log(highestTaskId);
-  // }, [allT]);
+  //   console.log(projectSelected);
+  // }, [projectSelected]);
 
   return (
     <>
@@ -167,7 +169,7 @@ export default function Dashboard({ projects, setProjects }) {
             handleOpenAddTaskOffcanvas={handleOpenAddTaskOffcanvas}
           />
         ) : showAllTasks ? (
-          <AllTasks allTaskData={allTaskData} />
+          <AllTasks allTaskData={allTaskData} handleSelectedTask={handleSelectedTask} handleSelectedProject={handleSelectedProject}  />
         ) : (
           <div className="flex items-center justify-center w-full h-full font-semibold text-2xl">
             No project selected

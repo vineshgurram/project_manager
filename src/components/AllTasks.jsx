@@ -1,4 +1,4 @@
-export default function AllTasks({ allTaskData }) {
+export default function AllTasks({ allTaskData,handleSelectedTask,handleSelectedProject }) {
 
   const getStatusName = (status) => {
     switch (status) {
@@ -12,11 +12,16 @@ export default function AllTasks({ allTaskData }) {
         return "";
     }
   };
+
+  function handleEditAction(projectId,taskId){
+    // handleSelectedProject(projectId);
+    handleSelectedTask(projectId,taskId)
+  }
   return (<div className="p-10">
     <h2 className="text-5xl font-semibold text-[#0D062D] mb-9">
         All tasks
       </h2>
-    <div className="project-view overflow-y-auto w-full h-100 border">
+    <div className="project-view overflow-auto w-full h-100 border">
       <table className="table-auto w-full text-left border border-gray-300 border-collapse">
         <thead>
           <tr className="sticky top-0 bg-gray-100">
@@ -38,6 +43,9 @@ export default function AllTasks({ allTaskData }) {
             <th scope="col" className="p-1.5 border border-gray-300">
               Task Description
             </th>
+            <th scope="col" className="p-1.5 border border-gray-300">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +57,7 @@ export default function AllTasks({ allTaskData }) {
               <td className="p-1.5 border border-gray-300">{getStatusName(task.status)}</td>
               <td className="p-1.5 border border-gray-300 capitalize">{task.priority}</td>
               <td className="p-1.5 border border-gray-300">{task.description}</td>
+              <td className="p-1.5 border border-gray-300"><button onClick={()=>handleEditAction(task.projectId,task.id)}>Edit</button></td>
             </tr>
           })}
         </tbody>
