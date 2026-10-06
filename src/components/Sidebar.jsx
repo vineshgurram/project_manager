@@ -56,7 +56,7 @@ export default function Sidebar({ projects, handleSelectedProject,handleOpenAddP
             </a>
           </li>
           <li className="pb-4 text-[#787486]">
-            <button type="button" onClick={()=>handleShowAllTasks()} className="flex gap-2">
+            <button type="button" onClick={()=>handleShowAllTasks()} className="flex gap-2 cursor-pointer">
               <svg
                 width={24}
                 height={24}
