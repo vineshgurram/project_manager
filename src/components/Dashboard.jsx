@@ -169,9 +169,9 @@ export default function Dashboard({ projects, setProjects }) {
     setShowAllTasks(true);
   }
 
-  // useEffect(() => {
-  //   console.log(projectSelected);
-  // }, [projectSelected]);
+  useEffect(() => {
+    console.log(projectSelected);
+  }, [projectSelected]);
 
   return (
     <>

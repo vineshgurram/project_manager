@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-export default function AllTasks({
+export default function   AllTasks({
   allTaskData,
   handleSelectedTask,
   filterStatus,
