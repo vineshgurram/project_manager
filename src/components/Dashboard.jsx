@@ -25,9 +25,10 @@ export default function Dashboard({ projects, setProjects }) {
         .filter((task) => {
           return (
             (selected.status === "" || task.status === selected.status) &&
-            (selected.priority === "" || task.priority === selected.priority) && 
+            (selected.priority === "" || task.priority === selected.priority) &&
             (selected.project === "" || project.title === selected.project) &&
-            (selected.search === "" || task.title.toLowerCase().includes(selected.search.toLowerCase()))
+            (selected.search === "" ||
+              task.title.toLowerCase().includes(selected.search.toLowerCase()))
           );
         })
         .map((task) => {
@@ -37,8 +38,6 @@ export default function Dashboard({ projects, setProjects }) {
 
     return filtered;
   }
-
-  // const allT = projects.flatMap(project => project.tasks)
 
   function handleSelectedProject(projectId) {
     setSelectedProject(projectId);
@@ -183,24 +182,24 @@ export default function Dashboard({ projects, setProjects }) {
           handleShowAllTasks={handleShowAllTasks}
         />
         <div className="overflow-auto w-full">
-        {selectedProjectData ? (
-          <ProjectView
-            selectedProjectData={selectedProjectData}
-            handleSelectedTask={handleSelectedTask}
-            handleOpenAddTaskOffcanvas={handleOpenAddTaskOffcanvas}
-          />
-        ) : showAllTasks ? (
-          <AllTasks
-            filterStatus={filterStatus}
-            allTaskData={allTaskData}
-            handleSelectedTask={handleSelectedTask}
-            handleSelectedProject={handleSelectedProject}
-          />
-        ) : (
-          <div className="flex items-center justify-center w-full h-full font-semibold text-2xl">
-            No project selected
-          </div>
-        )}
+          {selectedProjectData ? (
+            <ProjectView
+              selectedProjectData={selectedProjectData}
+              handleSelectedTask={handleSelectedTask}
+              handleOpenAddTaskOffcanvas={handleOpenAddTaskOffcanvas}
+            />
+          ) : showAllTasks ? (
+            <AllTasks
+              filterStatus={filterStatus}
+              allTaskData={allTaskData}
+              handleSelectedTask={handleSelectedTask}
+              handleSelectedProject={handleSelectedProject}
+            />
+          ) : (
+            <div className="flex items-center justify-center w-full h-full font-semibold text-2xl">
+              No project selected
+            </div>
+          )}
         </div>
 
         {selectedTask && (

@@ -7,9 +7,9 @@ import projectsData from "./data/projects";
 import Dashboard from "./components/Dashboard";
 
 function App() {
-  const [hideProjects, setHideProjects] = useState(false);
+  // const [hideProjects, setHideProjects] = useState(false);
   const [projects, setProjects] = useState(projectsData);
-  const [addProject, setAddProject] = useState("Reliance Jio");  
+  // const [addProject, setAddProject] = useState("Reliance Jio");  
 
   // const totalCompleted = useMemo(() => {
   //   return projects.reduce((total, project) => {
