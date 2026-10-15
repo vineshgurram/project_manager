@@ -8,7 +8,7 @@ import Dashboard from "./components/Dashboard";
 
 function App() {
   // const [hideProjects, setHideProjects] = useState(false);
-  const [projects, setProjects] = useState(projectsData);
+  // const [projects, setProjects] = useState(projectsData);
   // const [addProject, setAddProject] = useState("Reliance Jio");  
 
   // const totalCompleted = useMemo(() => {
@@ -84,7 +84,7 @@ function App() {
 
   return (
     <>
-      <Dashboard projects={projects} setProjects={setProjects} />
+      <Dashboard />
     </>
   );
 }

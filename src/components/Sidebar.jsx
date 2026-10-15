@@ -1,4 +1,12 @@
-export default function Sidebar({ projects, handleSelectedProject,handleOpenAddProjectOffcanvas,handleShowAllTasks }) {
+import useProjects from "../context/useProjects";
+
+export default function Sidebar({
+  handleSelectedProject,
+  handleOpenAddProjectOffcanvas,
+  handleShowAllTasks,
+}) {
+  const { projects } = useProjects();
+
   return (
     <aside className="sidebar flex-none p-2 border-[#DBDBDB] border-e max-w-62.5 w-62.5">
       <div className="flex items-center gap-1 py-6 px-4 border-[#DBDBDB] border-b">
@@ -56,7 +64,10 @@ export default function Sidebar({ projects, handleSelectedProject,handleOpenAddP
             </a>
           </li>
           <li className="pb-4 text-[#787486]">
-            <button type="button" onClick={()=>handleShowAllTasks()} className="flex gap-2 cursor-pointer">
+            <button
+              type="button"
+              onClick={() => handleShowAllTasks()}
+              className="flex gap-2 cursor-pointer">
               <svg
                 width={24}
                 height={24}
@@ -147,32 +158,35 @@ export default function Sidebar({ projects, handleSelectedProject,handleOpenAddP
       <div className="">
         <h3 className="text-xs font-bold text-[#787486] flex align-items-center justify-between mb-4 cursor-pointer py-7 px-5 pb-0">
           MY PROJECTS{" "}
-          <button type="button" className="cursor-pointer" onClick={()=>handleOpenAddProjectOffcanvas()}>
-          <svg
-            width={16}
-            height={16}
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M5.33334 8H10.6667"
-              stroke="#787486"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M8 10.6667V5.33333"
-              stroke="#787486"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M6.00001 14.6667H10C13.3333 14.6667 14.6667 13.3333 14.6667 10V6C14.6667 2.66667 13.3333 1.33333 10 1.33333H6.00001C2.66668 1.33333 1.33334 2.66667 1.33334 6V10C1.33334 13.3333 2.66668 14.6667 6.00001 14.6667Z"
-              stroke="#787486"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <button
+            type="button"
+            className="cursor-pointer"
+            onClick={() => handleOpenAddProjectOffcanvas()}>
+            <svg
+              width={16}
+              height={16}
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5.33334 8H10.6667"
+                stroke="#787486"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M8 10.6667V5.33333"
+                stroke="#787486"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M6.00001 14.6667H10C13.3333 14.6667 14.6667 13.3333 14.6667 10V6C14.6667 2.66667 13.3333 1.33333 10 1.33333H6.00001C2.66668 1.33333 1.33334 2.66667 1.33334 6V10C1.33334 13.3333 2.66668 14.6667 6.00001 14.6667Z"
+                stroke="#787486"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
         </h3>
         <ul className="overflow-auto h-[40vh] pt-0 py-7 px-5">

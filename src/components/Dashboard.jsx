@@ -5,13 +5,16 @@ import EditTaskOffcanvas from "./EditTaskOffcanvas";
 import AddTaskOffcanvas from "./AddTaskOffcanvas";
 import AddProjectOffcanvas from "./AddProjectOffcanvas";
 import AllTasks from "./AllTasks";
+import useProjects from "../context/useProjects";
 
-export default function Dashboard({ projects, setProjects }) {
+export default function Dashboard() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
   const [isAddProjectOpen, setIsAddProjectOpen] = useState(false);
   const [showAllTasks, setShowAllTasks] = useState(false);
+
+  const { projects, setProjects } = useProjects();
 
   const allTaskData = projects.flatMap((project) => {
     return project.tasks.map((task) => {
@@ -169,14 +172,13 @@ export default function Dashboard({ projects, setProjects }) {
   }
 
   useEffect(() => {
-    console.log(projectSelected);
-  }, [projectSelected]);
+    console.log(projects);
+  }, [projects]);
 
   return (
     <>
       <div className="wrapper flex w-screen h-screen overflow-hidden">
         <Sidebar
-          projects={projects}
           handleOpenAddProjectOffcanvas={handleOpenAddProjectOffcanvas}
           handleSelectedProject={handleSelectedProject}
           handleShowAllTasks={handleShowAllTasks}
@@ -191,7 +193,6 @@ export default function Dashboard({ projects, setProjects }) {
           ) : showAllTasks ? (
             <AllTasks
               filterStatus={filterStatus}
-              allTaskData={allTaskData}
               handleSelectedTask={handleSelectedTask}
               handleSelectedProject={handleSelectedProject}
             />

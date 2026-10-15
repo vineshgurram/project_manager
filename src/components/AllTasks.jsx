@@ -1,10 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
+import useProjects from "../context/useProjects";
 
-export default function   AllTasks({
-  allTaskData,
-  handleSelectedTask,
-  filterStatus,
-}) {
+export default function AllTasks({ handleSelectedTask, filterStatus }) {
+  const { projects } = useProjects();
+
+  const allTaskData = projects.flatMap((project) => {
+    return project.tasks.map((task) => {
+      return { ...task, project: project.title, projectId: project.id };
+    });
+  });
+
   const [tableFilter, setTableFilter] = useState({
     priority: "",
     status: "",
@@ -151,43 +156,48 @@ export default function   AllTasks({
             </tr>
           </thead>
           <tbody>
-            {allTasks.length > 0 ? allTasks.map((task, srno) => {
-              return (
-                <tr className="hover:bg-gray-50" key={task.id}>
-                  <td className="p-1.5 border border-gray-300 text-center">
-                    {srno + 1}
-                  </td>
-                  <td className="p-1.5 border border-gray-300">{task.title}</td>
-                  <td className="p-1.5 border border-gray-300">
-                    {task.project}
-                  </td>
-                  <td className="p-1.5 border border-gray-300">
-                    {getStatusName(task.status)}
-                  </td>
-                  <td className="p-1.5 border border-gray-300 capitalize">
-                    {task.priority}
-                  </td>
-                  <td className="p-1.5 border border-gray-300">
-                    {task.description}
-                  </td>
-                  <td className="p-1.5 border border-gray-300">
-                    <button
-                      onClick={() => handleEditAction(task.projectId, task.id)}>
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              );
-            })
-          :
-          <tr>
-            <td colSpan={7}>
-            <div className="flex items-center justify-center w-full h-full font-normal text-md text-center p-3">
-            Not found
-            </div>
-            </td>
-          </tr>
-          }
+            {allTasks.length > 0 ? (
+              allTasks.map((task, srno) => {
+                return (
+                  <tr className="hover:bg-gray-50" key={task.id}>
+                    <td className="p-1.5 border border-gray-300 text-center">
+                      {srno + 1}
+                    </td>
+                    <td className="p-1.5 border border-gray-300">
+                      {task.title}
+                    </td>
+                    <td className="p-1.5 border border-gray-300">
+                      {task.project}
+                    </td>
+                    <td className="p-1.5 border border-gray-300">
+                      {getStatusName(task.status)}
+                    </td>
+                    <td className="p-1.5 border border-gray-300 capitalize">
+                      {task.priority}
+                    </td>
+                    <td className="p-1.5 border border-gray-300">
+                      {task.description}
+                    </td>
+                    <td className="p-1.5 border border-gray-300">
+                      <button
+                        onClick={() =>
+                          handleEditAction(task.projectId, task.id)
+                        }>
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan={7}>
+                  <div className="flex items-center justify-center w-full h-full font-normal text-md text-center p-3">
+                    Not found
+                  </div>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
